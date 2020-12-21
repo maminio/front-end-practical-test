@@ -26,6 +26,15 @@ const validateMessages = {
   },
 };
 
+const hardValues = {
+  name: 'Pooyan',
+  username: 'pooyanadibi',
+  email: 'pooyan.adibi@gmail.com',
+  age: '33',
+  drink: 'coffee',
+  purpose: 'Just for fun',
+};
+
 const JoinNow: FunctionComponent = props => {
   const { joinNow } = useContext(FetchContext);
 
@@ -51,9 +60,9 @@ const JoinNow: FunctionComponent = props => {
      * */
     const onFinish = (values: any) => {
       console.log(values);
-      const { name } = values;
+      const { name, purpose } = values;
       joinNow
-        .submitForm('name', { name })
+        .submitForm('purpose', { purpose })
         .then((res: any) => {
           message.success(`Name ${name} pushed successfully`);
           console.log({ res });
@@ -85,7 +94,7 @@ const JoinNow: FunctionComponent = props => {
           <Form.Item
             name={['email']}
             label="Email"
-            rules={[{ type: 'email' }]}
+            rules={[{ type: 'email', required: true }]}
             required
           >
             <Input />
@@ -93,15 +102,24 @@ const JoinNow: FunctionComponent = props => {
           <Form.Item
             name={['age']}
             label="Age"
-            rules={[{ type: 'number', min: 35, max: 65 }]}
+            rules={[{ type: 'number', min: 35, max: 65, required: true }]}
             required
           >
             <InputNumber />
           </Form.Item>
-          <Form.Item name={['drink']} required label="Favourite Drink">
+          <Form.Item
+            name={['drink']}
+            required
+            label="Favourite Drink"
+            rules={[{ required: true }]}
+          >
             <Input />
           </Form.Item>
-          <Form.Item name={['purpose']} label="Why do you want to join?">
+          <Form.Item
+            name={['purpose']}
+            label="Why do you want to join?"
+            rules={[{ required: true }]}
+          >
             <Input.TextArea />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

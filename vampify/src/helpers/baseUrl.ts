@@ -1,3 +1,3 @@
 export const getAxiosUrl = (): string | undefined => {
-  return `http://localtoast:5000`;
+  return `http://localhost:5000`;
 };

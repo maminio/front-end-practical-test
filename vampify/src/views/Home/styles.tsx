@@ -21,4 +21,3 @@ export const Content = styled.div`
   box-shadow: 0 0 25px 0 #f4f4f4;
   background-color: #ffffff;
 `;
-

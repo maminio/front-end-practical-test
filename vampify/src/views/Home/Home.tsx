@@ -49,7 +49,6 @@ const Dashboard: FunctionComponent = props => {
   return (
     <Wrapper className="flex flex-wrap content-center">
       <Helmet title="Home" />
-      <HealthCheck />
       <div
         className="
           flex flex-row h-100 w-full flex-wrap lg-flex-no-wrap
@@ -58,6 +57,7 @@ const Dashboard: FunctionComponent = props => {
            "
       >
         <div className="flex flex-1 flex-col content-center align-middle">
+          <HealthCheck />
           {renderImage()}
         </div>
         <div className="flex flex-1 flex-col ">{renderDetailContent()}</div>
