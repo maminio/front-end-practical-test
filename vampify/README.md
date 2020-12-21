@@ -5,7 +5,7 @@
 
 ## Introduction
 This is a simple landing-page website that has couple of problems in terms of application logic and server communication.
-You task is to identify them and provide comprehensive solution.
+Your task is to identify them and provide comprehensive solution.
 
 
 ## 1. Booting up
@@ -13,7 +13,6 @@ You task is to identify them and provide comprehensive solution.
 	https://github.com/maminio/front-practical-test.git
 	2. Create and checkout a branch with your first name and date id: 2020/12/25 => 20201225
 	3. Start up the client buy running `yarn start`.
-	5. The WebApp should be accessible from `http://team9.local`
 
 
 ## 2. Website health status
