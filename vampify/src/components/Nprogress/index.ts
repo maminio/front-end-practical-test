@@ -1,0 +1,1 @@
+export { NprogressFallback } from './Nprogress';
