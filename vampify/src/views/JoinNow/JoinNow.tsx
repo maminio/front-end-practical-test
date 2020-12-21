@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { Button, Layout, Form, Input, InputNumber, message } from 'antd';
 import { Link } from 'react-router-dom';
@@ -26,17 +31,44 @@ const validateMessages = {
   },
 };
 
-const hardValues = {
-  name: 'Pooyan',
-  username: 'pooyanadibi',
-  email: 'pooyan.adibi@gmail.com',
-  age: '33',
-  drink: 'coffee',
-  purpose: 'Just for fun',
+const secrets: any = {
+  name: '',
+  username: '',
+  email: '',
+  age: '',
+  drink: '',
+  purpose: '',
 };
 
 const JoinNow: FunctionComponent = props => {
   const { joinNow } = useContext(FetchContext);
+
+  const findSecret = (fieldName: string, fieldValue: any) => {
+    return new Promise((resolve, reject) => {
+      const interval = setInterval(() => {
+        const headers = {
+          header: { secret: secrets[fieldName] },
+        };
+        joinNow
+          .submitForm(fieldName, { fieldValue }, headers)
+          .then((res: any) => {
+            message.success(`${fieldName} ${fieldValue} pushed successfully`);
+            console.log('res:', res);
+            if (res.secret !== undefined) {
+              secrets[fieldName] = res.secret;
+              console.log('res.secret:', res.secret);
+              resolve(interval);
+            }
+          })
+          .catch((e: any) => {
+            message.error(`Name pushed failed`);
+            console.log({ e });
+            reject(e);
+          });
+      }, 1000);
+      return () => clearInterval(interval);
+    });
+  };
 
   function renderDescription() {
     return (
@@ -60,17 +92,14 @@ const JoinNow: FunctionComponent = props => {
      * */
     const onFinish = (values: any) => {
       console.log(values);
-      const { name, purpose } = values;
-      joinNow
-        .submitForm('purpose', { purpose })
-        .then((res: any) => {
-          message.success(`Name ${name} pushed successfully`);
-          console.log({ res });
-        })
-        .catch((e: any) => {
-          message.error(`Name pushed failed`);
-          console.log({ e });
+
+      for (const [key, value] of Object.entries(values)) {
+        findSecret(key, value).then((interval: any) => {
+          clearInterval(interval);
+          console.log(`FINAL SECRET ${key}:`, secrets[key]);
+          console.log('Available secrets: ', JSON.stringify(secrets));
         });
+      }
     };
     return (
       <div className="w-2/3 divide-y-4 divide-yellow-600 divide-dashed">
@@ -81,15 +110,16 @@ const JoinNow: FunctionComponent = props => {
           validateMessages={validateMessages}
         >
           <Form.Item name={['name']} label="Name" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="Pooyan" />
           </Form.Item>
           <Form.Item
             name={['username']}
             label="Username"
             // @TODO Add username validation here
+
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input defaultValue="pooyanadibi" />
           </Form.Item>
           <Form.Item
             name={['email']}
@@ -97,7 +127,7 @@ const JoinNow: FunctionComponent = props => {
             rules={[{ type: 'email', required: true }]}
             required
           >
-            <Input />
+            <Input defaultValue="pooyan.adibi@gmail.com" />
           </Form.Item>
           <Form.Item
             name={['age']}
@@ -105,7 +135,7 @@ const JoinNow: FunctionComponent = props => {
             rules={[{ type: 'number', min: 35, max: 65, required: true }]}
             required
           >
-            <InputNumber />
+            <InputNumber defaultValue={44} />
           </Form.Item>
           <Form.Item
             name={['drink']}
@@ -113,14 +143,14 @@ const JoinNow: FunctionComponent = props => {
             label="Favourite Drink"
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input defaultValue="coffee" />
           </Form.Item>
           <Form.Item
             name={['purpose']}
             label="Why do you want to join?"
             rules={[{ required: true }]}
           >
-            <Input.TextArea />
+            <Input.TextArea defaultValue="For fun" />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
