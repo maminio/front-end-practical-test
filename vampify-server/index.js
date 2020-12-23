@@ -90,6 +90,14 @@ app.post('/join-form/purpose', (req, res) => {
     return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
 })
 
+app.post('/join-form/username', (req, res) => {
+    const { headers } = req;
+    if(headerHasSecret(headers)){
+        return res.sendStatus(200);
+    }
+    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
+})
+
 
 
 app.listen(port, () => {

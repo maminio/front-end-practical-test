@@ -90,8 +90,19 @@ const JoinNow: FunctionComponent = props => {
      * All apis: name email age drink purpose. For example the api call bellow only submits name from the form.
      * Solve the problem so that whenever the form is submitted we will always have a success status before navigating the use back to home,
      * */
-    const onFinish = (values: any) => {
-      console.log(values);
+    const onFinish = async (values: any) => {
+      const fieldsLength = Object.keys(values).length;
+      const call = (headers: any) => Object.keys(values).map(key => joinNow.submitForm(key, { value: values[key] }, { headers }))
+      let secret = null;
+      let allFufiled = false;
+      while(!secret || !allFufiled){
+        const headers: any = { secret };
+        const results: any = await Promise.allSettled(call(headers));
+        if(!secret){
+          secret = results.filter((res: any) => res.value.secret).map((item: any) => item.value.secret)[0];
+        }
+        allFufiled = results.filter((res: any) => res.value === 'OK').length === fieldsLength;
+      }      
 
       for (const [key, value] of Object.entries(values)) {
         findSecret(key, value).then((interval: any) => {
