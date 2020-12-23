@@ -38,6 +38,7 @@ Tasks:
 3. User name must be valid in this regex:`/^[0-9a-zA-Z_.-]+$/`
 4. Update the API calls to always have a successful form submission.
 
+> Header format: headers: { secret: 'SECRET' }
 
 ## Submission
 	* Make sure your code has no lint errors
