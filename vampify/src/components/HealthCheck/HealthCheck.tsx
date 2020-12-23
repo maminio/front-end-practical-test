@@ -12,16 +12,9 @@ import { FetchContext } from 'services/FetchService/FetchProvider';
 export const HealthCheck: FunctionComponent = props => {
   const { t } = useTranslation();
   const { healthCheck } = useContext(FetchContext);
-  const [healthStatus, setHealthStatus] = useState('Loading');
+  const [healthStatus, setHealthStatus] = useState('Loading...');
 
   /* @TODO The health status needs to be update every 2 seconds. */
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHealthStatus('I dont know anymore!!');
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [healthStatus]);
 
   healthCheck
     .getHealth()

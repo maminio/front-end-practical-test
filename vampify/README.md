@@ -10,7 +10,7 @@ Your task is to identify them and provide comprehensive solution.
 
 ## 1. Booting up
 	1. Please clone the following repository inside `~/workspace/team9/`
-	https://github.com/maminio/front-practical-test.git
+	https://github.com/maminio/front-end-practical-test.git
 	2. Create and checkout a branch with your first name and date id: 2020/12/25 => 20201225
 	3. Start up the client buy running `yarn start`.
 
@@ -30,7 +30,7 @@ Your task is to identify them and provide comprehensive solution.
 Our back-end was designed by the most weirdest developer ever. The managed to write the most random way of building an api.
 The behaviour is as follow:
 1. We have multiple APIs for each of the form fields.
-2. Every api call has a random behaviour. Almost every 6 calls results in a success.
+2. Every api call has a random behaviour. Almost every 10 calls results in a success.
 
 Tasks:
 1. Update form validation params to make all fields required.

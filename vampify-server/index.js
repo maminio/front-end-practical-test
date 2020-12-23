@@ -91,6 +91,14 @@ app.post('/join-form/purpose', (req, res) => {
 })
 
 
+app.post('/join-form/username', (req, res) => {
+    const { headers } = req;
+    if(headerHasSecret(headers)){
+        return res.sendStatus(200);
+    }
+    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
