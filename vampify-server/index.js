@@ -52,8 +52,11 @@ app.post('/join-form/name', (req, res) => {
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
-})
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();})
 
 
 
@@ -62,16 +65,22 @@ app.post('/join-form/email', (req, res) => {
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
-})
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();})
 
 app.post('/join-form/age', (req, res) => {
     const { headers } = req;
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
-})
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();})
 
 
 app.post('/join-form/drink', (req, res) => {
@@ -79,7 +88,11 @@ app.post('/join-form/drink', (req, res) => {
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();
 })
 
 app.post('/join-form/purpose', (req, res) => {
@@ -87,7 +100,11 @@ app.post('/join-form/purpose', (req, res) => {
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();
 })
 
 
@@ -96,7 +113,11 @@ app.post('/join-form/username', (req, res) => {
     if(headerHasSecret(headers)){
         return res.sendStatus(200);
     }
-    return res.status(randomStatus()).send(JSON.stringify({ secret: generateSecret() }));
+    const random = randomStatus();
+    if(random == 200){
+        return res.status(random).send(JSON.stringify({ secret: generateSecret() }));
+    }
+    return res.status(random).send();
 })
 
 
